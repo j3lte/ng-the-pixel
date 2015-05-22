@@ -5,7 +5,7 @@
 > This is probably one of the most useless Angular Directives you will ever find. Available as bower component for your project.
 
 ## Demo
-Coming soon
+Because this is a super useless directive, the need to setup a demo will be coming later
 
 ## Usage
 1. `npm install ng-the-pixel` or `bower install ng-the-pixel -p` and set this script as a dependency
