@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="sample-app" id="ng-app" class="js">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Angular directive: thePixel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- look inside this css to see how container and ratios work -->
+    <link rel="stylesheet" type="text/css" href="thepixel-style.css" />
+    <style>
+
+    	/* Project specific css, only for this demo */
+    	body {
+    		padding: 0; margin: 0; font: 16px "Lucida Sans Unicode","Lucida Grande",verdana,arial,sans-serif;
+    	}
+
+    	h1,
+    	a { color: #00a1de; }
+
+		.demo-wrapper {
+			width: 780px;
+			margin: 0 auto;
+		}
+
+        .demo-container {
+            background-color: #CCCCCC;
+            width: 100%;
+            height: 20px;
+            position: relative;
+        }
+
+		@media (max-width:768px){
+			body { padding: 0 5px; }
+			.demo-wrapper {
+				width: 100%;
+			}
+		}
+		@media (max-width:480px){
+			.demo-sample p {
+				width: auto;
+				float: none;
+				margin-bottom: 10px;
+			}
+		}
+	</style>
+
+</head>
+<body ng-controller="appCtrl" >
+
+<div class="demo-wrapper">
+
+	<h1>Angular thePixel directive</h1>
+
+	<p>Directive for loading the most useless Angular directive ever: thePixel.</p>
+
+	<p>See <a href="https://github.com/j3lte/thepixel">Github</a> for source.</p>
+
+	<h4>Example (pixel 1, normal)</h4>
+
+    <div class="pixel1" the-pixel></div>
+
+    <h4>Example (pixel 2, random color [the-pixel-color="rand"])</h4>
+
+    <div class="pixel2" the-pixel the-pixel-color="rand"></div>
+
+    <h4>Example (pixel 3, red color [the-pixel-color="#FF0000"]))</h4>
+
+    <div class="pixel3" the-pixel the-pixel-color="#FF0000"></div>
+
+    <h4>Example (pixel 4, position absolute [the-pixel-position="absolute,1,1"]))</h4>
+
+    <div class="demo-container">
+        <div class="pixel4" the-pixel the-pixel-color="#FF0000" the-pixel-position="absolute,1,1"></div>
+    </div>
+
+    <h4>Example (pixel 5, position absolute [the-pixel-position="absolute,-10,-10"]))</h4>
+
+    <div class="demo-container">
+        <div class="pixel5" the-pixel the-pixel-color="#FF0000" the-pixel-position="absolute,-10,-10"></div>
+    </div>
+
+</div>
+
+<script src="vendor/angular.min.js"></script>
+<script src="thepixel.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+{
+  "name": "ng-the-pixel",
+  "main": [
+    "release/thepixel-style.css",
+    "release/thepixel.js"
+  ],
+  "version": "0.0.1",
+  "homepage": "https://github.com/j3lte/ng-the-pixel",
+  "authors": [
+    "Jelte Lagendijk <jwlagendijk@gmail.com>"
+  ],
+  "description": "The most useless Angular directive ever",
+  "keywords": [
+    "angular",
+    "directive",
+    "useless",
+    "pixel"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "config/**",
+    "grunt/**",
+    "test/**",
+    "sample/**",
+    "src/**",
+    "bower.json",
+    ".coveralls.yml",
+    ".gitignore",
+    ".jshintrc",
+    ".jshintignore",
+    ".travis.yml",
+    "start.js",
+    "Procfile",
+    "node_modules",
+    "bower_components",
+    "bower.json",
+    "Gruntfile.js",
+    "package.json",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "devDependencies": {
+    "angular": "~1.3.0",
+    "angular-mocks": "~1.3.0"
+  }
+}

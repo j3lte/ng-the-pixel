@@ -1,0 +1,13 @@
+.thepixel {
+    width: 2px;
+    height: 2px;
+    background-color: #00FF00;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.thepixel * {
+    display: none;
+}
