@@ -38,7 +38,7 @@ sauce:
 travis:
  - 'production'
  - 'coveralls'
- - 'sauce'
+# - 'sauce'
 
 # CREATE A PACKAGE
 package:

@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/j3lte/ng-the-pixel.svg)](https://travis-ci.org/j3lte/ng-the-pixel)
-[![Coverage Status](https://coveralls.io/repos/j3lte/ng-the-pixel/badge.png?branch=master)](https://coveralls.io/r/j3lte/ng-the-pixel?branch=master)
+[![Coverage Status](https://coveralls.io/repos/j3lte/ng-the-pixel/badge.svg?branch=master)](https://coveralls.io/r/j3lte/ng-the-pixel?branch=master)
 
 # The Pixel
 > This is probably one of the most useless Angular Directives you will ever find. Available as bower component for your project.
