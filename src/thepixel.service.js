@@ -18,6 +18,11 @@ angular.module('j3lte.thePixel')
         };
 
         var encode64 = function(input) {
+
+            if (window.btoa) {
+                return window.btoa(input);
+            }
+
             if (typeof input !== 'string') {
                 input = input + '';
             }
@@ -44,6 +49,11 @@ angular.module('j3lte.thePixel')
         };
 
         var decode64 = function(input) {
+
+            if (window.atob) {
+                return window.atob(input);
+            }
+
             var output = "";
             var chr1, chr2, chr3;
             var enc1, enc2, enc3, enc4;
