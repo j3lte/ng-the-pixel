@@ -31,9 +31,6 @@ Now we can simply run:
 - `grunt package` to make a complete package which validates everything (used when making new package)
 - `grunt update` to update our Angular lib (defined in package json) and verify if module works with some versions backwards as well
 
-## History
-The actual setup for this project (testing etc) was borrowed from the [ng-lazy-image repository](https://github.com/afklm/ng-lazy-image). I used this setup to create my own directive.
-
 ## License
 As AngularJS itself, this module is released under the permissive [MIT license](LICENSE.md).
 
