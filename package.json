@@ -4,7 +4,7 @@
     "release/thepixel-style.css",
     "release/thepixel.js"
   ],
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/j3lte/ng-the-pixel",
   "repository": {
     "type": "git",

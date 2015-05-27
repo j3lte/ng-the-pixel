@@ -160,6 +160,16 @@ describe("The pixel Service:", function() {
         expect(encoded).toEqual('VGhpcyBpcyB0aGUgcGl4ZWw=');
     });
 
+    it('Should base64 encode a string even when window.btoa is not available', function (){
+        window.btoa = undefined;
+        var str = "This is the pixel";
+
+        var encoded = thePixelService.encode(str);
+
+        expect(encoded).toEqual(jasmine.any(String));
+        expect(encoded).toEqual('VGhpcyBpcyB0aGUgcGl4ZWw=');
+    });
+
     it('Should base64 encode a number', function (){
         var str = 100000;
 
@@ -170,6 +180,16 @@ describe("The pixel Service:", function() {
     });
 
     it('Should base64 decode a string', function (){
+        var str = "VGhpcyBpcyB0aGUgcGl4ZWwgYmFzZTY0IGRlY29kZWQ=";
+
+        var decoded = thePixelService.decode(str);
+
+        expect(decoded).toEqual(jasmine.any(String));
+        expect(decoded).toEqual('This is the pixel base64 decoded');
+    });
+
+    it('Should base64 decode a string even when window.atob is not available', function (){
+        window.atob = undefined;
         var str = "VGhpcyBpcyB0aGUgcGl4ZWwgYmFzZTY0IGRlY29kZWQ=";
 
         var decoded = thePixelService.decode(str);
