@@ -27,7 +27,8 @@ module.exports = {
         src: [
             'angular/angular.min.js',
             'angular/angular.min.js.map',
-            'angular-mocks/angular-mocks.js'
+            'angular-mocks/angular-mocks.js',
+            'angular-base64/angular-base64.min.js',
         ],
         dest: './src/lib',
         expand: true,

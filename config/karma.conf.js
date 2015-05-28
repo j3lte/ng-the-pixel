@@ -9,6 +9,7 @@ module.exports = function (config) {
             'sample/vendor/angular.min.js',
             'sample/vendor/angular-mocks.js',
             //'release/thepixel.js',
+            'src/lib/angular-base64.min.js',
             'src/thepixel.module.js',
             'src/thepixel.service.js',
             'src/thepixel.directive.js',

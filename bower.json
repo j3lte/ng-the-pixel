@@ -4,7 +4,7 @@
     "release/thepixel-style.css",
     "release/thepixel.js"
   ],
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/j3lte/ng-the-pixel",
   "authors": [
     "Jelte Lagendijk <jwlagendijk@gmail.com> "
@@ -39,6 +39,9 @@
     "README.md",
     "LICENSE.md"
   ],
+  "dependencies" : {
+    "angular-base64": "~2.0.5"
+  },
   "devDependencies": {
     "angular": "~1.3.0",
     "angular-mocks": "~1.3.0"

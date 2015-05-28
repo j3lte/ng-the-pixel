@@ -64,10 +64,7 @@ angular.module('j3lte.thePixel')
                 }
 
                 scope.action = function () {
-                    var output = action();
-                    if (angular.isDefined(attrs.thePixelEncode)) {
-                        output = pixelService.encode(output);
-                    }
+                    var output = angular.isDefined(attrs.thePixelEncode) ? pixelService.encode(action()) : action();
                     alert(output);
                 };
 
