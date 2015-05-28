@@ -19,6 +19,10 @@ angular.module('j3lte.thePixel')
 
         var encode64 = function(input) {
 
+            if (!input) {
+                return null;
+            }
+
             if (window.btoa) {
                 return window.btoa(input);
             }
@@ -49,6 +53,10 @@ angular.module('j3lte.thePixel')
         };
 
         var decode64 = function(input) {
+
+            if (!input) {
+                return null;
+            }
 
             if (window.atob) {
                 return window.atob(input);

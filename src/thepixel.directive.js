@@ -7,47 +7,20 @@ angular.module('j3lte.thePixel')
             restrict: 'A',
             replace: true,
             transclude: true,
-            template: '<div class="thepixel" ng-click="action()"></div>',
-            controller: function($scope, $element, $attrs){
-                var action;
-
-                if ($attrs.thePixelShow) {
-                    var act/*, args*/;
-                    var matches = $attrs.thePixelShow.match(/(^.*?)\((.*?)\)/);
-                    act = matches ? matches[1] : $attrs.thePixelShow;
-                    // TODO: add arguments to action
-                    //args = matches ? matches[2] : null;
-                    /*switch(act) {
-                        case 'rand':
-                            action = pixelService.random;
-                        break;
-                        default:
-                            action = pixelService.time;
-                        break;
-                    }*/
-                    action = (act === 'rand') ? pixelService.random : pixelService.time;
-
-                } else {
-                    action = pixelService.time;
-                }
-
-                $scope.action = function () {
-                    var output = ($attrs.thePixelEncode && $attrs.thePixelEncode === 'true') ? pixelService.encode(action()) : action();
-                    alert(output);
-                };
-            },
-            compile: function(element, attrs) {
+            template: '<div class="thepixel"></div>',
+            link: function(scope, element, attrs) {
 
                 switch(attrs.thePixel) {
                     case 'random':
                         element.addClass('random');
-                    break;
+                        break;
                     default:
                         element.addClass('static');
-                    break;
+                        break;
                 }
 
-                if (attrs.thePixelPosition) {
+                // Pixel position
+                if (angular.isDefined(attrs.thePixelPosition)) {
                     // the-pixel-position accepts a position as "<absolute|fixed>,<top px>,<left px>"
                     var positionArray = attrs.thePixelPosition.split(',');
                     if (positionArray.length === 3 && attrs.thePixel !== 'random') {
@@ -69,7 +42,8 @@ angular.module('j3lte.thePixel')
                     }
                 }
 
-                if (attrs.thePixelColor) {
+                // Setting color
+                if (angular.isDefined(attrs.thePixelColor)) {
                     if (attrs.thePixelColor === 'rand') {
                         element[0].style['background-color'] = '#' + pixelService.randomColor();
                     } else {
@@ -77,6 +51,29 @@ angular.module('j3lte.thePixel')
                     }
                 }
 
+                // Setting an action
+                var action;
+
+                if (angular.isDefined(attrs.thePixelShow)) {
+                    var matches = attrs.thePixelShow.match(/(^.*?)\((.*?)\)/);
+                    var act = matches ? matches[1] : attrs.thePixelShow;
+                    action = (act === 'random') ? pixelService.random : pixelService.time;
+
+                } else {
+                    action = pixelService.time;
+                }
+
+                scope.action = function () {
+                    var output = action();
+                    if (angular.isDefined(attrs.thePixelEncode)) {
+                        output = pixelService.encode(output);
+                    }
+                    alert(output);
+                };
+
+                element.bind('click', scope.action);
+
+                //console.log(scope, element, attrs);
             }
         };
 

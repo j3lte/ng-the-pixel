@@ -55,7 +55,7 @@ module.exports = function (config) {
                 type : 'lcov',
                 file : 'coverage.html'
             }, {
-                type: 'text-summary',
+                type: 'text',
                 subdir: '.'
             }]
         },

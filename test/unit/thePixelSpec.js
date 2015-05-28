@@ -28,6 +28,11 @@ describe("The pixel:", function() {
 
         expect(el.hasClass('static')).toBe(true);
         expect(el.html()).toBe('');
+
+        expect(el[0].style.backgroundColor).toBe('');
+        expect(el[0].style.position).toBe('');
+        expect(el[0].style.top).toBe('');
+        expect(el[0].style.left).toBe('');
     });
 
     it('Should add class on setting the pixel random ', function() {
@@ -44,6 +49,7 @@ describe("The pixel:", function() {
         scope.$digest();
 
         expect(el[0].style.backgroundColor).toBeDefined();
+        expect(el[0].style.backgroundColor === '').toBeFalsy();
     });
 
     it('Should set a fixed background color', function() {
@@ -53,6 +59,38 @@ describe("The pixel:", function() {
 
         expect(el[0].style.backgroundColor).toBe('rgb(255, 0, 0)');
     });
+
+    it('Should trigger an alert on click', function() {
+        var el = angular.element('<div the-pixel></div>');
+        var compiled = $compile(el)(scope);
+        scope.$digest();
+
+        compiled.triggerHandler('click');
+
+        expect(window.alert).toHaveBeenCalled();
+    });
+
+});
+
+describe("The pixel positions:", function() {
+
+    var $document, scope, $compile;
+    var thePixelService;
+
+    beforeEach(module('j3lte.thePixel'));
+
+    beforeEach(inject(['$compile', '$rootScope', '$document', 'pixelService',
+        function(_$compile_, $rootScope, _$document_, pixelService) {
+
+            scope = $rootScope.$new();
+            $document = _$document_;
+            $compile = _$compile_;
+            spyOn(window, 'alert');
+
+            thePixelService = pixelService;
+
+        }
+    ]));
 
     it('Should set a position', function() {
         var el = angular.element('<div the-pixel the-pixel-position="absolute,1,1"></div>');
@@ -64,7 +102,37 @@ describe("The pixel:", function() {
         expect(el[0].style.left).toBe('1px');
     });
 
-    it('Should set a position from bottom and right on minus', function() {
+    it('Should set a position when fixed', function() {
+        var el = angular.element('<div the-pixel the-pixel-position="fixed,1,1"></div>');
+        $compile(el)(scope);
+        scope.$digest();
+
+        expect(el[0].style.position).toBe('fixed');
+        expect(el[0].style.top).toBe('1px');
+        expect(el[0].style.left).toBe('1px');
+    });
+
+    it('Should set a position from bottom and left', function() {
+        var el = angular.element('<div the-pixel the-pixel-position="absolute,-1,1"></div>');
+        $compile(el)(scope);
+        scope.$digest();
+
+        expect(el[0].style.position).toBe('absolute');
+        expect(el[0].style.bottom).toBe('1px');
+        expect(el[0].style.left).toBe('1px');
+    });
+
+    it('Should set a position from top and right', function() {
+        var el = angular.element('<div the-pixel the-pixel-position="absolute,1,-1"></div>');
+        $compile(el)(scope);
+        scope.$digest();
+
+        expect(el[0].style.position).toBe('absolute');
+        expect(el[0].style.top).toBe('1px');
+        expect(el[0].style.right).toBe('1px');
+    });
+
+    it('Should set a position from bottom and right', function() {
         var el = angular.element('<div the-pixel the-pixel-position="absolute,-1,-1"></div>');
         $compile(el)(scope);
         scope.$digest();
@@ -74,14 +142,22 @@ describe("The pixel:", function() {
         expect(el[0].style.right).toBe('1px');
     });
 
-    it('Should trigger an alert on click', function() {
-        var el = angular.element('<div the-pixel></div>');
-        var compiled = $compile(el)(scope);
+    it('Should not set a position when improperly defined position', function() {
+        var el = angular.element('<div the-pixel the-pixel-position="abs,1,1"></div>');
+        $compile(el)(scope);
         scope.$digest();
 
-        compiled.triggerHandler('click');
+        expect(el[0].style.position).toBe('');
+        expect(el[0].style.top).toBe('');
+        expect(el[0].style.left).toBe('');
 
-        expect(window.alert).toHaveBeenCalled();
+        var el2 = angular.element('<div the-pixel the-pixel-position="abs,1"></div>');
+        $compile(el2)(scope);
+        scope.$digest();
+
+        expect(el2[0].style.position).toBe('');
+        expect(el2[0].style.top).toBe('');
+        expect(el2[0].style.left).toBe('');
     });
 
 });
@@ -106,8 +182,40 @@ describe("The pixel actions:", function() {
         }
     ]));
 
+    it('Should have an action in the scope', function() {
+        var el = angular.element('<div the-pixel></div>');
+        var compiled = $compile(el)(scope);
+        scope.$digest();
+
+        expect(scope.action).toBeDefined();
+    });
+
     it('Should set the action to random', function() {
-        var el = angular.element('<div the-pixel the-pixel-show="rand"></div>');
+        var el = angular.element('<div the-pixel the-pixel-show="random"></div>');
+        var compiled = $compile(el)(scope);
+        scope.$digest();
+
+        expect(scope.action).toBeDefined();
+    });
+
+    it('Should work with arguments', function() {
+        var el = angular.element('<div the-pixel the-pixel-show="random()"></div>');
+        var compiled = $compile(el)(scope);
+        scope.$digest();
+
+        expect(scope.action).toBeDefined();
+    });
+
+    it('Should set action to time if pixel-show attribute is bogus', function() {
+        var el = angular.element('<div the-pixel the-pixel-show="foo()"></div>');
+        var compiled = $compile(el)(scope);
+        scope.$digest();
+
+        expect(scope.action).toBeDefined();
+    });
+
+    it('Should encode if encoding is switched on', function() {
+        var el = angular.element('<div the-pixel the-pixel-show="foo()" the-pixel-encode="true"></div>');
         var compiled = $compile(el)(scope);
         scope.$digest();
 
@@ -179,6 +287,12 @@ describe("The pixel Service:", function() {
         expect(encoded).toEqual('MTAwMDAw');
     });
 
+    it('Should base64 encode return null if no arguments are given', function (){
+        var encoded = thePixelService.encode();
+
+        expect(encoded).toEqual(null);
+    });
+
     it('Should base64 decode a string', function (){
         var str = "VGhpcyBpcyB0aGUgcGl4ZWwgYmFzZTY0IGRlY29kZWQ=";
 
@@ -196,6 +310,12 @@ describe("The pixel Service:", function() {
 
         expect(decoded).toEqual(jasmine.any(String));
         expect(decoded).toEqual('This is the pixel base64 decoded');
+    });
+
+    it('Should base64 decode return null if no arguments are given', function (){
+        var decoded = thePixelService.decode();
+
+        expect(decoded).toEqual(null);
     });
 
 });
