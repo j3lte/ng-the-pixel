@@ -7,7 +7,7 @@ angular.module('j3lte.thePixel')
             restrict: 'A',
             replace: true,
             transclude: true,
-            template: '<div class="thepixel" href="#" ng-click="action()"></div>',
+            template: '<div class="thepixel" ng-click="action()"></div>',
             controller: function($scope, $element, $attrs){
                 var action;
 
@@ -15,6 +15,7 @@ angular.module('j3lte.thePixel')
                     var act/*, args*/;
                     var matches = $attrs.thePixelShow.match(/(^.*?)\((.*?)\)/);
                     act = matches ? matches[1] : $attrs.thePixelShow;
+                    // TODO: add arguments to action
                     //args = matches ? matches[2] : null;
                     /*switch(act) {
                         case 'rand':
@@ -47,6 +48,7 @@ angular.module('j3lte.thePixel')
                 }
 
                 if (attrs.thePixelPosition) {
+                    // the-pixel-position accepts a position as "<absolute|fixed>,<top px>,<left px>"
                     var positionArray = attrs.thePixelPosition.split(',');
                     if (positionArray.length === 3 && attrs.thePixel !== 'random') {
                         if (positionArray[0] === 'absolute' || positionArray[0] === 'fixed') {

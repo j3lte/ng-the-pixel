@@ -2,7 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/j3lte/ng-the-pixel/badge.svg?branch=master)](https://coveralls.io/r/j3lte/ng-the-pixel?branch=master)
 
 # The Pixel
-> This is probably one of the most useless Angular Directives you will ever find. Available as bower component for your project.
+> This is probably one of the most useless Angular Directives you will ever find. Available as bower component for your project. It is for me to practice some concepts in programming Angular directives
 
 The Pixel was inspired by the famous Green Pixel on [Geenstijl](http://geenstijl.nl) (try to spot it at the top right corner. Click on it. They wrote an article about it, in Dutch, [here](http://www.geenstijl.nl/mt/archieven/2012/01/man_snapt_groene_pixel_niet_af.html))
 
